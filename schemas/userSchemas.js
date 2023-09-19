@@ -5,6 +5,7 @@ const userSchema = Schema({
   username: {
     type: String,
     required: true,
+    
   },
   avatar: {
     type: String,

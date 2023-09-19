@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const request = require("supertest");
 const { seed } = require("../data/seed");
 const testUsers = require("../data/usersData");
+const { User } = require("../schemas/userSchemas");
 
 beforeAll(() => {
   return seed();
@@ -75,18 +76,18 @@ describe("GET /users/:username", () => {
       });
   });
 
-//   test.only("400: should return Bad Request if given an invalid type of username", () => {
-//     return request(app)
-//       .get('/users/:username')
-//       .expect(400)
-//       .then(({ body }) => {
-//         expect(body.message).toBe("Bad Request");
-//   });
-// })
-})
+  //   test.only("400: should return Bad Request if given an invalid type of username", () => {
+  //     return request(app)
+  //       .get('/users/:username')
+  //       .expect(400)
+  //       .then(({ body }) => {
+  //         expect(body.message).toBe("Bad Request");
+  //   });
+  // })
+});
 
-describe('POST /users', () => {
-  test('201: should add a user to the db', () => { 
+describe("POST /users", () => {
+  test("201: should add a user to the db", () => {
     const newUser = {
       username: "banana",
       avatar: "https://example.com/avatar/user1.jpg",
@@ -96,15 +97,56 @@ describe('POST /users', () => {
       likedFilms: ["film101", "film102"],
       friends: ["2", "3"],
       watchGroups: ["101", "102", "103"],
-    }
+    };
 
-    return request(app).post('/users', newUser).expect(201).then(({body})=>{
-const {addedUser} = body
-expect(addedUser).toMatchObject({
-  ...newUser,
-  _id: expect.any(String),
-  __v: expect.any(Number),
+    return request(app)
+      .post("/users")
+      .send(newUser)
+      .expect(201)
+      .then(({ body }) => {
+        const { addedUser } = body;
+        expect(addedUser).toMatchObject({
+          ...newUser,
+          _id: expect.any(String),
+          __v: expect.any(Number),
+        });
+      });
+  });
+//   test('400: should return Bad Request if a new user is posted without required fields', () => {
+//     const newUser = {};
+//       return request(app)
+//       .post('/users')
+//       .send(newUser)
+//       .expect(400)
+//       .then(({body}) => {
+//         expect(body.message).toBe('Bad request')
+//       })
+//   });
 });
-    })
-   })
-})
+
+describe('PATCH /users/:username', () => { 
+    test('200: should update the user profile', () => {
+        const testPatch = {streamingServices: ['newStreamingService']}
+        return request(app)
+        .patch('/users/user1')
+        .send(testPatch)
+        .expect(200)
+        .then(({body}) => {
+            const updatedUser = body
+            expect(updatedUser.streamingServices).toEqual(['newStreamingService'])
+        })
+    });
+ })
+
+
+ describe('DELETE /users/:username', () => {
+    test('204: should delete a user by username', () => {
+        return request(app)
+        .delete('/users/user1')
+        .expect(204).then(() => {
+            return User.find({username: 'user1'}).then((result) => {
+                expect(result).toEqual([])
+            })
+        })
+    });
+ });

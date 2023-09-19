@@ -1,4 +1,4 @@
-const { fetchAllUsers, fetchUserByUsername } = require("../models/userModel")
+const { fetchAllUsers, fetchUserByUsername, addUser, updateUser, removeUser } = require("../models/userModel")
 
 exports.getAllUsers = (req, res, next) => {
     fetchAllUsers().then((data) => {
@@ -15,6 +15,24 @@ exports.getUserByUsername = (req, res, next) => {
 
 
 exports.postUser = (req, res, next) => {
-    const {user} = req.body
-    console.log(user);
+    const newUser = req.body
+    addUser(newUser).then((data) => {
+        res.status(201).send({addedUser: data})
+    }).catch(next)
+}
+
+exports.patchUser = (req, res, next) => {
+    const username = req.params
+    const propertyToUpdate = req.body
+    updateUser(username, propertyToUpdate).then((data) => {
+        res.status(200).send(data)
+    })
+}
+
+exports.deleteUser = async (req, res, next) => {
+    const username = req.params
+    removeUser(username).then(() => {
+        res.status(204).send()
+    })
+
 }
