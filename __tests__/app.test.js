@@ -75,15 +75,6 @@ describe("GET /users/:username", () => {
         expect(body.message).toBe("Not Found");
       });
   });
-
-  //   test.only("400: should return Bad Request if given an invalid type of username", () => {
-  //     return request(app)
-  //       .get('/users/:username')
-  //       .expect(400)
-  //       .then(({ body }) => {
-  //         expect(body.message).toBe("Bad Request");
-  //   });
-  // })
 });
 
 describe("POST /users", () => {
@@ -112,16 +103,6 @@ describe("POST /users", () => {
         });
       });
   });
-//   test('400: should return Bad Request if a new user is posted without required fields', () => {
-//     const newUser = {};
-//       return request(app)
-//       .post('/users')
-//       .send(newUser)
-//       .expect(400)
-//       .then(({body}) => {
-//         expect(body.message).toBe('Bad request')
-//       })
-//   });
 });
 
 describe('PATCH /users/:username', () => { 
@@ -136,8 +117,6 @@ describe('PATCH /users/:username', () => {
             expect(updatedUser.streamingServices).toEqual(['newStreamingService'])
         })
     });
-
-    test('400: should not update the user profile if the property doesnt exist', () => {})
 
      test("404: should not update the user profile if the user doesnt exist ", () => {
        const testPatch = { streamingServices: ["newStreamingService"] };
@@ -169,3 +148,5 @@ describe('PATCH /users/:username', () => {
          });
  })
 })
+
+
