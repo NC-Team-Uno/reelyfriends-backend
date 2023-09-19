@@ -136,6 +136,14 @@ describe('PATCH /users/:username', () => {
             expect(updatedUser.streamingServices).toEqual(['newStreamingService'])
         })
     });
+
+    test('400: should not update the user profile if the property doesnt exist', () => {})
+
+     test("404: should not update the user profile if the user doesnt exist ", () => {
+       const testPatch = { streamingServices: ["newStreamingService"] };
+      return request(app).patch('/users/user9999').send(testPatch).expect(404).then(({body}) => { 
+        expect(body.message).toBe('Not Found')
+     });
  })
 
 
@@ -149,4 +157,15 @@ describe('PATCH /users/:username', () => {
             })
         })
     });
- });
+
+         test("404: should not delete the user profile if the user doesnt exist ", () => {
+           const testPatch = { streamingServices: ["newStreamingService"] };
+           return request(app)
+             .delete("/users/user6564")
+             .expect(404)
+             .then(({ body }) => {
+               expect(body.message).toBe("Not Found");
+             });
+         });
+ })
+})

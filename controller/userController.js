@@ -22,17 +22,20 @@ exports.postUser = (req, res, next) => {
 }
 
 exports.patchUser = (req, res, next) => {
+
+
     const username = req.params
     const propertyToUpdate = req.body
+  
     updateUser(username, propertyToUpdate).then((data) => {
         res.status(200).send(data)
-    })
+    }).catch(next)
 }
 
 exports.deleteUser = async (req, res, next) => {
     const username = req.params
-    removeUser(username).then(() => {
+    removeUser(username).then((result) => {
         res.status(204).send()
-    })
+    }).catch(next)
 
 }
