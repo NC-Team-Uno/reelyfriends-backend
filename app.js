@@ -5,8 +5,8 @@ const app = express();
 
 const mongoose = require("mongoose");
 const uri = require("./connection");
+const { getAllGroups, getGroup } = require("./controller/groupsController");
 mongoose.connect(uri)
-
 
 app.use(express.json());
 
@@ -19,6 +19,10 @@ app.post("/users", postUser);
 app.patch('/users/:username', patchUser)
 
 app.delete('/users/:username', deleteUser)
+
+app.get('/groups', getAllGroups)
+
+app.get('/groups/:name', getGroup)
 
 app.use(handle404)
 app.use(handle500);
