@@ -14,11 +14,6 @@ app.patch('/users/:username', patchUser)
 
 app.delete('/users/:username', deleteUser)
 
-
-// app.listen(3000, () => {
-//     console.log('listening on port 3000');
-// })
 app.use(handle404)
-app.use(handle400);
 app.use(handle500);
 module.exports = app

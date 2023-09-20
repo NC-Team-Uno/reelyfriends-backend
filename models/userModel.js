@@ -17,11 +17,7 @@ if(user.length === 0){
 
 exports.addUser = async (newUser) => {
 const userToAdd = new User(newUser)
-  try {
     return userToAdd.save() 
-  } catch (error) {
-    error = error
-  }
 }
 
 exports.updateUser = async (username, propertyToUpdate) => {

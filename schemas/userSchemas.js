@@ -5,7 +5,6 @@ const userSchema = Schema({
   username: {
     type: String,
     required: true,
-    
   },
   avatar: {
     type: String,
@@ -37,6 +36,6 @@ const userSchema = Schema({
   },
 });
 
-const User = mongoose.model('testUsers', userSchema)
+const User = mongoose.model("testUsers", userSchema);
 
-module.exports = {User}
+module.exports = { User };
