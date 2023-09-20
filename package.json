@@ -2,12 +2,13 @@
   "name": "reelyfriends-backend",
   "version": "1.0.0",
   "description": "ReelyFriends Back-End",
-  "main": "index.js",
+  "main": "listen.js",
   "scripts": {
     "test": "jest",
     "start": "node listen.js",
     "seed": "node ./data/runSeed.js",
-    "dev": "nodemon listen.js"
+    "dev": "nodemon listen.js",
+    "seed-prod": "NODE_ENV=production npm run seed"
   },
   "keywords": [],
   "author": "",

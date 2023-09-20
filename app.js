@@ -5,7 +5,6 @@ const app = express();
 
 const mongoose = require("mongoose");
 const uri = require("./connection");
-
 mongoose.connect(uri)
 
 
