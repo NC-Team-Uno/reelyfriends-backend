@@ -1,13 +1,9 @@
 const { User } = require("../schemas/userSchemas");
-const mongoose = require("mongoose");
-const testUsers = require("./usersData");
-require("dotenv").config();
 
-exports.seed = async () => {
+exports.seed = async (data) => {
   try {
-    await mongoose.connect(process.env.TEST_DATABASE_URL);
     await User.collection.drop();
-    await User.insertMany(testUsers);
+    await User.insertMany(data);
   } catch (err) {
     console.log(err);
   }

@@ -1,7 +1,14 @@
 const express = require("express");
 const { getAllUsers, getUserByUsername, postUser, patchUser, deleteUser } = require("./controller/userController");
-const { handle404, handle400, handle500 } = require("./controller/errorController");
+const { handle404, handle500 } = require("./controller/errorController");
 const app = express();
+
+const mongoose = require("mongoose");
+const uri = require("./connection");
+
+mongoose.connect(uri)
+
+
 app.use(express.json());
 
 app.get('/users', getAllUsers)
