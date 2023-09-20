@@ -1,7 +1,8 @@
 const { User } = require("../schemas/userSchemas");
 
-exports.fetchAllUsers = () => {
-  return User.find()
+exports.fetchAllUsers = async () => {
+  const result = await User.find()
+  return result
 }
 
 exports.fetchUserByUsername = async (username) => {

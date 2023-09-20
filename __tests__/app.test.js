@@ -2,11 +2,13 @@ const app = require("../app");
 const mongoose = require("mongoose");
 const request = require("supertest");
 const { seed } = require("../data/seed");
-const testUsers = require("../data/usersData");
+const testUsers = require("../data/testData/usersData");
 const { User } = require("../schemas/userSchemas");
+require("dotenv").config();
 
-beforeAll(() => {
-  return seed();
+beforeAll(async () => {
+  await mongoose.connect(process.env.TEST_DATABASE_URL);
+  return seed(testUsers);
 });
 
 afterAll(() => {
