@@ -5,7 +5,7 @@ const app = express();
 
 const mongoose = require("mongoose");
 const uri = require("./connection");
-const { getAllGroups, getGroup } = require("./controller/groupsController");
+const { getAllGroups, getGroup, postGroup, patchGroup, deleteGroup } = require("./controller/groupsController");
 mongoose.connect(uri)
 
 app.use(express.json());
@@ -23,6 +23,12 @@ app.delete('/users/:username', deleteUser)
 app.get('/groups', getAllGroups)
 
 app.get('/groups/:name', getGroup)
+
+app.post('/groups', postGroup)
+
+app.patch('/groups/:name', patchGroup)
+
+app.delete('/groups/:name', deleteGroup)
 
 app.use(handle404)
 app.use(handle500);

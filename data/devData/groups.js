@@ -1,0 +1,55 @@
+const groups = [
+  {
+    groupAdmin: "MovieBuffMaster",
+    name: "Movie Buffs",
+    avatar: "https://example.com/avatars/movie_buffs.jpg",
+    members: [
+      "MovieBuffMaster",
+      "HollywoodChaser",
+      "SilverScreenAddict",
+      "CinematicDreamer",
+      "BlockbusterGuru",
+    ],
+    streamingServices: ["8", "337", "350", "9", "39", "38"],
+    preferences: [],
+    likedFilms: ["677179", "330", "343668", "155", "49026"],
+  },
+  {
+    groupAdmin: "ReelCritic2023",
+    name: "Film Critics Club",
+    avatar: "https://example.com/avatars/film_critics.jpg",
+    members: ["ReelCritic2023", "PopcornJunkie"],
+    streamingServices: ["350", "29", "531"],
+    preferences: [],
+    likedFilms: ["677179", "330", "343668", "155"],
+  },
+  {
+    groupAdmin: "PopcornJunkie",
+    name: "Popcorn Lovers",
+    avatar: "https://example.com/avatars/popcorn_lovers.jpg",
+    members: ["PopcornJunkie", "OscarWinnerWannabe", "DirectorAtHeart"],
+    streamingServices: ["380", "8"],
+    preferences: [],
+    likedFilms: ["155", "49026"],
+  },
+  {
+    groupAdmin: "CinematicDreamer",
+    name: "Cinema Dreamers",
+    avatar: "https://example.com/avatars/cinema_dreamers.jpg",
+    members: ["CinematicDreamer", "BlockbusterGuru", "FilmFanatic24"],
+    streamingServices: ["8", "337", "350"],
+    preferences: [],
+    likedFilms: ["591274"],
+  },
+  {
+    groupAdmin: "SilverScreenAddict",
+    name: "Silver Screen Enthusiasts",
+    avatar: "https://example.com/avatars/silver_screen.jpg",
+    members: ["SilverScreenAddict", "HollywoodChaser", "MovieBuffMaster"],
+    streamingServices: ["38", "103", "531"],
+    preferences: [],
+    likedFilms: ["49026"],
+  },
+];
+
+module.exports = groups

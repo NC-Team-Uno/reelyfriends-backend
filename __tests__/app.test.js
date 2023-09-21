@@ -106,6 +106,9 @@ describe("USERS", () => {
             _id: expect.any(String),
             __v: expect.any(Number),
           });
+          return User.find().then((usersInDb) => {
+            expect(usersInDb.length).toBe(testUsers.length + 1);
+          });
         });
     });
   });
@@ -135,40 +138,42 @@ describe("USERS", () => {
           expect(body.message).toBe("Not Found");
         });
     });
+  });
 
-    describe("DELETE /users/:username", () => {
-      test("204: should delete a user by username", () => {
-        return request(app)
-          .delete("/users/user1")
-          .expect(204)
-          .then(() => {
-            return User.find({ username: "user1" }).then((result) => {
-              expect(result).toEqual([]);
-            });
+  describe("DELETE /users/:username", () => {
+    test("204: should delete a user by username", () => {
+      return request(app)
+        .delete("/users/user1")
+        .expect(204)
+        .then(() => {
+          return User.find({ username: "user1" }).then((result) => {
+            expect(result).toEqual([]);
           });
-      });
+        });
+    });
 
-      test("404: should not delete the user profile if the user doesnt exist ", () => {
-        const testPatch = { streamingServices: ["newStreamingService"] };
-        return request(app)
-          .delete("/users/user6564")
-          .expect(404)
-          .then(({ body }) => {
-            expect(body.message).toBe("Not Found");
-          });
-      });
+    test("404: should not delete the user profile if the user doesnt exist ", () => {
+      const testPatch = { streamingServices: ["newStreamingService"] };
+      return request(app)
+        .delete("/users/user6564")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
     });
   });
 });
 
 describe("GROUP", () => {
-  describe('GET /groups', () => {
-    test('200: should return all groups', () => {
-      return request(app).get('/groups')
-      .expect(200).then(({body}) => {
-        expect(body.length).toBe(groups.length);
-        expect(Array.isArray(body)).toBe(true)
-      })
+  describe("GET /groups", () => {
+    test("200: should return all groups", () => {
+      return request(app)
+        .get("/groups")
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).toBe(groups.length);
+          expect(Array.isArray(body)).toBe(true);
+        });
     });
     test("200: should return all groups, with the following properties: groupAdmin, name, avatar, streamingServices, preferences, likedFilms, members, _id, _v", () => {
       return request(app)
@@ -191,7 +196,7 @@ describe("GROUP", () => {
         });
     });
   });
-  describe('GET /groups/:name', () => {
+  describe("GET /groups/:name", () => {
     test("200: should return a group object based on the name provided", () => {
       return request(app)
         .get("/groups/Movie Lovers")
@@ -213,9 +218,93 @@ describe("GROUP", () => {
               "film202",
               "film301",
               "film302",
-            ]
+            ],
           });
-        })
+        });
+    });
   });
-})
+  describe("POST /groups", () => {
+    test("201: should create a new group on the db", () => {
+      const newGroup = {
+        groupAdmin: "testUserAdmin",
+        name: "testGroup",
+        avatar: "https://example.com/group/avatar/movie_lovers.jpg",
+        members: ["user1", "user2", "user3", "testUserAdmin"],
+        streamingServices: ["Netflix", "Amazon Prime", "Hulu"],
+        preferences: ["Horror", "Comedy", "Action"],
+        likedFilms: [
+          "film101",
+          "film102",
+          "film201",
+          "film202",
+          "film301",
+          "film302",
+        ],
+      };
+
+      return request(app)
+        .post("/groups")
+        .send(newGroup)
+        .expect(201)
+        .then(({ body }) => {
+          const { addedGroup } = body;
+          expect(addedGroup).toMatchObject({
+            ...newGroup,
+            _id: expect.any(String),
+            __v: expect.any(Number),
+          });
+          return Group.find().then((groupsInDb) => {
+            expect(groupsInDb.length).toBe(groups.length + 1);
+          });
+        });
+    });
+  });
+
+  describe("PATCH /groups/:name", () => {
+    test("200: should update the group", () => {
+      const testPatch = { streamingServices: ["updatedStreamingServices"] };
+      return request(app)
+        .patch("/groups/Movie Lovers")
+        .send(testPatch)
+        .expect(200)
+        .then(({ body }) => {
+          const updatedGroup = body;
+          expect(updatedGroup.streamingServices).toEqual([
+            "updatedStreamingServices",
+          ]);
+        });
+    });
+    test("404: recieve Not Found if group does not exist", () => {
+      const testPatch = { streamingServices: ["updatedStreamingServices"] };
+      return request(app)
+        .patch("/groups/nonExistantGroup")
+        .send(testPatch)
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
+    });
+  });
+
+  describe("DELETE /groups/:name", () => {
+    test("204: should delete a group by name", () => {
+      return request(app)
+        .delete("/groups/Movie Lovers")
+        .expect(204)
+        .then(() => {
+          return Group.find({ name: "Movie Lovers" }).then((result) => {
+            expect(result).toEqual([]);
+          });
+        });
+    });
+
+    test("404: should not delete the group if the group doesnt exist ", () => {
+      return request(app)
+        .delete("/groups/bananas")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
+    });
+  });
 });
