@@ -3,7 +3,7 @@ const { fetchAllUsers, fetchUserByUsername, addUser, updateUser, removeUser } = 
 exports.getAllUsers = (req, res, next) => {
     fetchAllUsers().then((data) => {
         res.status(200).send(data)
-    })
+    }).catch(next)
 }
 
 exports.getUserByUsername = (req, res, next) => {
@@ -22,8 +22,6 @@ exports.postUser = (req, res, next) => {
 }
 
 exports.patchUser = (req, res, next) => {
-
-
     const username = req.params
     const propertyToUpdate = req.body
   

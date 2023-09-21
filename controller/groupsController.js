@@ -4,21 +4,21 @@ const { fetchAllGroups, fetchGroup, addGroup, updateGroup, removeGroup } = requi
 exports.getAllGroups = (req, res, next) => {
     fetchAllGroups().then((data) => {
         res.status(200).send(data)
-    })
+    }).catch(next)
 }
 
 exports.getGroup = (req, res, next) => {
     const group = req.params
     fetchGroup(group).then((data) => {
         res.status(200).send(data[0])
-    })
+    }).catch(next)
 }
 
 exports.postGroup = (req, res, next) => {
     const newGroup = req.body
     addGroup(newGroup).then((data) => {
         res.status(201).send({addedGroup: data})
-    })
+    }).catch(next)
 }
 
 exports.patchGroup = (req, res, next) => {

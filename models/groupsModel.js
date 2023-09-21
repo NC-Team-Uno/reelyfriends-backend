@@ -7,6 +7,9 @@ exports.fetchAllGroups = async () => {
 
 exports.fetchGroup = async (group) => {
     const groupToReturn = await Group.find(group)
+    if (groupToReturn.length === 0) {
+        return Promise.reject({status: 404, message: 'Not Found'})
+    }
     return groupToReturn
 }
 
