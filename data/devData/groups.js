@@ -2,7 +2,7 @@ const groups = [
   {
     groupAdmin: "MovieBuffMaster",
     name: "Movie Buffs",
-    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
+    avatar: "https://robohash.org/9e1edfbb85064db9a89d5fd9b3c28208?set=set3&bgset=bg1&size=200x200",
     members: [
       "MovieBuffMaster",
       "HollywoodChaser",
@@ -17,7 +17,7 @@ const groups = [
   {
     groupAdmin: "ReelCritic2023",
     name: "Film Critics Club",
-    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
+    avatar: "https://robohash.org/4f0d304d77912155788b1ac71923c3e2?set=set3&bgset=bg1&size=200x200",
     members: ["ReelCritic2023", "PopcornJunkie"],
     streamingServices: ["350", "29", "531"],
     preferences: [],
@@ -26,7 +26,7 @@ const groups = [
   {
     groupAdmin: "PopcornJunkie",
     name: "Popcorn Lovers",
-    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
+    avatar: "https://robohash.org/c35010af55bb2ce59cdc0c14f70f98da?set=set3&bgset=bg1&size=200x200",
     members: ["PopcornJunkie", "OscarWinnerWannabe", "DirectorAtHeart"],
     streamingServices: ["380", "8"],
     preferences: [],
@@ -35,7 +35,7 @@ const groups = [
   {
     groupAdmin: "CinematicDreamer",
     name: "Cinema Dreamers",
-    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
+    avatar: "https://robohash.org/270913836a97df8369e45af1a82cb5f6?set=set3&bgset=bg1&size=200x200",
     members: ["CinematicDreamer", "BlockbusterGuru", "FilmFanatic24"],
     streamingServices: ["8", "337", "350"],
     preferences: [],
@@ -44,7 +44,7 @@ const groups = [
   {
     groupAdmin: "SilverScreenAddict",
     name: "Silver Screen Enthusiasts",
-    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
+    avatar: "https://robohash.org/c6cdbbf8eb74eaad6df8467a09e681bf?set=set2&bgset=bg1&size=400x400",
     members: ["SilverScreenAddict", "HollywoodChaser", "MovieBuffMaster"],
     streamingServices: ["38", "103", "531"],
     preferences: [],
