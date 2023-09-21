@@ -2,7 +2,7 @@ const groups = [
   {
     groupAdmin: "MovieBuffMaster",
     name: "Movie Buffs",
-    avatar: "https://example.com/avatars/movie_buffs.jpg",
+    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
     members: [
       "MovieBuffMaster",
       "HollywoodChaser",
@@ -17,7 +17,7 @@ const groups = [
   {
     groupAdmin: "ReelCritic2023",
     name: "Film Critics Club",
-    avatar: "https://example.com/avatars/film_critics.jpg",
+    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
     members: ["ReelCritic2023", "PopcornJunkie"],
     streamingServices: ["350", "29", "531"],
     preferences: [],
@@ -26,7 +26,7 @@ const groups = [
   {
     groupAdmin: "PopcornJunkie",
     name: "Popcorn Lovers",
-    avatar: "https://example.com/avatars/popcorn_lovers.jpg",
+    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
     members: ["PopcornJunkie", "OscarWinnerWannabe", "DirectorAtHeart"],
     streamingServices: ["380", "8"],
     preferences: [],
@@ -35,7 +35,7 @@ const groups = [
   {
     groupAdmin: "CinematicDreamer",
     name: "Cinema Dreamers",
-    avatar: "https://example.com/avatars/cinema_dreamers.jpg",
+    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
     members: ["CinematicDreamer", "BlockbusterGuru", "FilmFanatic24"],
     streamingServices: ["8", "337", "350"],
     preferences: [],
@@ -44,7 +44,7 @@ const groups = [
   {
     groupAdmin: "SilverScreenAddict",
     name: "Silver Screen Enthusiasts",
-    avatar: "https://example.com/avatars/silver_screen.jpg",
+    avatar: "https://vinicius73.github.io/gravatar-url-generator/#/robohash",
     members: ["SilverScreenAddict", "HollywoodChaser", "MovieBuffMaster"],
     streamingServices: ["38", "103", "531"],
     preferences: [],
@@ -52,4 +52,4 @@ const groups = [
   },
 ];
 
-module.exports = groups
+module.exports = groups;
