@@ -222,6 +222,13 @@ describe("GROUP", () => {
           });
         });
     });
+    test('404: should respond with Not Found if the group does not exist', () => {
+      return request(app).get('/groups/nonExistant')
+      .expect(404)
+      .then(({body}) => {
+        expect(body.message).toBe('Not Found')
+      })
+    });
   });
   describe("POST /groups", () => {
     test("201: should create a new group on the db", () => {
