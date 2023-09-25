@@ -143,10 +143,10 @@ describe("USERS", () => {
   describe("DELETE /users/:username", () => {
     test("204: should delete a user by username", () => {
       return request(app)
-        .delete("/users/user1")
+        .delete("/users/user20")
         .expect(204)
         .then(() => {
-          return User.find({ username: "user1" }).then((result) => {
+          return User.find({ username: "user20" }).then((result) => {
             expect(result).toEqual([]);
           });
         });
@@ -222,31 +222,22 @@ describe("GROUP", () => {
           });
         });
     });
-    test('404: should respond with Not Found if the group does not exist', () => {
-      return request(app).get('/groups/nonExistant')
-      .expect(404)
-      .then(({body}) => {
-        expect(body.message).toBe('Not Found')
-      })
+    test("404: should respond with Not Found if the group does not exist", () => {
+      return request(app)
+        .get("/groups/nonExistant")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
     });
   });
   describe("POST /groups", () => {
     test("201: should create a new group on the db", () => {
       const newGroup = {
-        groupAdmin: "testUserAdmin",
+        groupAdmin: "user2",
         name: "testGroup",
         avatar: "https://example.com/group/avatar/movie_lovers.jpg",
-        members: ["user1", "user2", "user3", "testUserAdmin"],
-        streamingServices: ["Netflix", "Amazon Prime", "Hulu"],
-        preferences: ["Horror", "Comedy", "Action"],
-        likedFilms: [
-          "film101",
-          "film102",
-          "film201",
-          "film202",
-          "film301",
-          "film302",
-        ],
+        members: ["user2", "user3"],
       };
 
       return request(app)
@@ -255,11 +246,15 @@ describe("GROUP", () => {
         .expect(201)
         .then(({ body }) => {
           const { addedGroup } = body;
-          expect(addedGroup).toMatchObject({
-            ...newGroup,
-            _id: expect.any(String),
-            __v: expect.any(Number),
-          });
+          expect(addedGroup).toHaveProperty('_id', expect.any(String))
+          expect(addedGroup).toHaveProperty('__v', expect.any(Number))
+          expect(addedGroup).toHaveProperty('groupAdmin', 'user2')
+          expect(addedGroup).toHaveProperty('name', 'testGroup')
+          expect(addedGroup).toHaveProperty('avatar', "https://example.com/group/avatar/movie_lovers.jpg")
+          expect(addedGroup).toHaveProperty('members', ["user2", "user3"])
+          expect(addedGroup).toHaveProperty('streamingServices', ['Disney+', 'HBO Max', 'Apple TV+', 'Hulu', 'Amazon Prime'])
+          expect(addedGroup).toHaveProperty('preferences', ['Drama', 'Comedy', 'Documentary', 'Romance', 'Fantasy'])
+          expect(addedGroup).toHaveProperty('likedFilms', [ 'film201', 'film202', 'film301', 'film302' ])
           return Group.find().then((groupsInDb) => {
             expect(groupsInDb.length).toBe(groups.length + 1);
           });
